@@ -11,6 +11,39 @@
     <link rel="stylesheet" href="booking.css">
 
     <title>To The Top</title>
+
+    <!-- Form Input Validation Using Javascript-->
+    <script>
+      function validateForm() {
+        let name = document.forms["booking-form"]["name"].value;
+        let email = document.forms["booking-form"]["email"].value;
+        let date = document.getElementById("date").value;
+        let coach = document.getElementById("coach-select").value;
+        let service = document.getElementById("service-select").value;
+        if (name == "") {
+          alert("Your name must be filled out");
+          return false;
+        }
+        var emailPat = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+        if (!emailPat.test(email)) {
+          alert('Please enter a valid email address. Ex: sai.zalos@gmail.com');
+          return false;
+        }
+        if (date.trim() == "") {
+          alert("A date must be selected");
+          return false;
+        }
+        if (coach == "") {
+          alert("A coach must be selected");
+          return false;
+        }
+        if (service == "") {
+          alert("A coaching service must be selected");
+          return false;
+        }
+      }
+      </script>
+
   </head>
   <body>
     <!-- Option Javascript: Bootstrap Bundle with Popper -->
@@ -34,6 +67,7 @@
         <!-- Booking Page Title -->
         <h2>Book A Session</h2>
       </div>
+      <form name ="booking-form" onsubmit="return validateForm()" method="post">
       <div class="row">
         <div class="col-1"></div>
         <div class="col">
@@ -47,13 +81,13 @@
                       <div class="input-group mb-3 input-group-md">
                         <!-- Your Name-->
                         <span class="input-group-text" id="name">Your Name:</span>
-                        <input type="text" class="form-control" placeholder="Sai Zalos" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" name="name" class="form-control" placeholder="Sai Zalos" aria-label="Username" aria-describedby="basic-addon1" required>
                       </div>
                       <h4></h4>
                       <div class="input-group mb-3 input-group-md">
                         <!-- Your Email -->
                         <span class="input-group-text" id="email">Your Email:</span>
-                        <input type="text" class="form-control" placeholder="sai.zalos@gmail.com" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" name="email" class="form-control" placeholder="sai.zalos@gmail.com" aria-label="Username" aria-describedby="basic-addon1" required>
                       </form>
                     </div>
                   </div>
@@ -63,8 +97,8 @@
                   <!-- Submit Booking Button-->
                   <form>
                     <div class="text-center">
-                      <a class="btn btn-primary btn-lg" href="./booking-confirm.html" id="submit" onclick="return validate()"
-                      role="input"><h6 style="font-size: 2vw;">Submit Booking</h6></a>
+                      <a class="btn btn-primary btn-lg" href="./booking-confirm.html" id="submit" onclick="return validateForm()"
+                      role="submit" type="submit" value="Submit"><h6 style="font-size: 2vw;">Submit Booking</h6></a>
                     </div>
                   </form>
                 </div>
@@ -79,7 +113,7 @@
                         <form>
                           <!-- Session Date -->
                           <label for="date">Date:</label>
-                          <input type="date" id="birthday" name="birthday">
+                          <input type="date" id="date" name="date" required>
                         </form>
                       </div>
                     </div>
@@ -117,10 +151,10 @@
                     <div class="row">
                       <div class="col">
                         <!-- Coach -->
-                        <form>
+                        <form name="booking-form">
                           <div class="calender-box">
                             <div class="form-floating">
-                              <select class="form-select" id="floatingSelect" aria-label="Coach">
+                              <select class="form-select" id="coach-select" name="coach-select" aria-label="Coach" required>
                                 <option selected value="">Select A Coach</option>
                                 <option value="1">Dabuz</option>
                                 <option value="2">MKLeo</option>
@@ -135,10 +169,10 @@
                       </div>
                       <div class="col">
                         <!-- Coaching Service-->
-                        <form>
+                        <form name="booking-form">
                           <div class="calender-box">
                             <div class="form-floating">
-                              <select class="form-select" id="floatingSelect" aria-label="Coaching Service">
+                              <select class="form-select" id="service-select" name="service-select" aria-label="Coaching Service" required>
                                 <option selected value="">Select A Service</option>
                                 <option value="1">$25/hr - 1v1 A Pro</option>
                                 <option value="2">$22/hr - Preparing For A Match</option>
@@ -155,10 +189,11 @@
               </div>
           </div>
         </div>
+        </form>
         <div class="col-1"></div>        
       </div>
       <h3></h3>
     </div>
-    <script src="input-validation.js"></script>
+    
   </body>
 </html>
